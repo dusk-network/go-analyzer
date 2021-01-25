@@ -32,10 +32,15 @@ func CheckLicenseHeaders() []error {
 }
 
 func checkDirectory(dirPath string) []error {
+	//nolint:gosec
 	dir, err := os.Open(dirPath)
 	if err != nil {
 		panic(err)
 	}
+
+	defer func() {
+		_ = dir.Close()
+	}()
 
 	files, err := dir.Readdir(0)
 	if err != nil {
@@ -43,6 +48,7 @@ func checkDirectory(dirPath string) []error {
 	}
 
 	errs := make([]error, 0)
+
 	for _, file := range files {
 		if file.IsDir() {
 			errs = append(errs, checkDirectory(dirPath+"/"+file.Name())...)
@@ -59,10 +65,15 @@ func checkDirectory(dirPath string) []error {
 }
 
 func checkFile(fileName string) error {
+	//nolint:gosec
 	file, err := os.Open(fileName)
 	if err != nil {
 		panic(err)
 	}
+
+	defer func() {
+		_ = file.Close()
+	}()
 
 	buf := make([]byte, len(correctHeader))
 	if _, err := file.Read(buf); err != nil {

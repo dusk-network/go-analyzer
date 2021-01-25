@@ -6,7 +6,6 @@
 
 // Package runner provides an easy interface to run any available lint, as well
 // as running them all in sequence.
-
 package runner
 
 import (

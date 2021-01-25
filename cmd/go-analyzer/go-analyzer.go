@@ -15,6 +15,7 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
+// CLIFlags contains all possible application flags.
 var CLIFlags = []cli.Flag{
 	&cli.BoolFlag{
 		Name:    "all",
