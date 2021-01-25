@@ -8,4 +8,4 @@
 package lints
 
 // Fn defines the standard function signature for a lint.
-type Fn func() []error
+type Fn func(string) []error

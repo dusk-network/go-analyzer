@@ -22,12 +22,7 @@ const correctHeader = `// This Source Code Form is subject to the terms of the M
 
 // CheckLicenseHeaders checks that all *.go files contained in the current
 // directory have the proper license headers.
-func CheckLicenseHeaders() []error {
-	dirPath, err := os.Getwd()
-	if err != nil {
-		panic(err)
-	}
-
+func CheckLicenseHeaders(dirPath string) []error {
 	return checkDirectory(dirPath)
 }
 
@@ -54,7 +49,7 @@ func checkDirectory(dirPath string) []error {
 			errs = append(errs, checkDirectory(dirPath+"/"+file.Name())...)
 		}
 
-		if strings.Contains(file.Name(), ".go") {
+		if strings.TrimSuffix(file.Name(), ".go") != file.Name() {
 			if err := checkFile(dirPath + "/" + file.Name()); err != nil {
 				errs = append(errs, err)
 			}

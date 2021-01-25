@@ -52,8 +52,13 @@ func action(ctx *cli.Context) error {
 		cli.ShowAppHelpAndExit(ctx, 1)
 	}
 
+	dirPath, err := os.Getwd()
+	if err != nil {
+		panic(err)
+	}
+
 	if ctx.Bool("all") {
-		if errs := runner.RunAll(); errs != nil {
+		if errs := runner.RunAll(dirPath); errs != nil {
 			for _, err := range errs {
 				fmt.Println(err)
 			}
@@ -67,7 +72,7 @@ func action(ctx *cli.Context) error {
 
 	for _, flag := range CLIFlags {
 		if ctx.Bool(flag.String()) {
-			if errs := runner.Run(flag.String()); errs != nil {
+			if errs := runner.Run(flag.String(), dirPath); errs != nil {
 				for _, err := range errs {
 					fmt.Println(err)
 				}

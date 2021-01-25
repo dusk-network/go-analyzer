@@ -20,9 +20,9 @@ var allChecks = map[string]lints.Fn{
 }
 
 // RunAll checks in the `lints` package.
-func RunAll() (errs []error) {
+func RunAll(dirPath string) (errs []error) {
 	for _, f := range allChecks {
-		errs = append(errs, f()...)
+		errs = append(errs, f(dirPath)...)
 	}
 
 	return
@@ -30,11 +30,11 @@ func RunAll() (errs []error) {
 
 // Run a check for a given name. Returns an error if the lint does not exist in
 // `allChecks`.
-func Run(name string) []error {
+func Run(name, dirPath string) []error {
 	checkFunc, ok := allChecks[name]
 	if !ok {
 		return []error{fmt.Errorf("unknown lint - %v", name)}
 	}
 
-	return checkFunc()
+	return checkFunc(dirPath)
 }
