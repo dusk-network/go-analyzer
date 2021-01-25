@@ -29,18 +29,15 @@ func main() {
 	}
 
 	if err := app.Run(os.Args); err != nil {
+		fmt.Println(err)
 		os.Exit(1)
 	}
 }
 
 func action(ctx *cli.Context) error {
-	if arguments := ctx.Args(); arguments.Len() == 0 {
-		return errors.New("no lints selected. exiting...")
-	}
-
 	if ctx.Bool("all") {
 		if errs := runner.RunAll(); errs != nil {
-			for err := range errs {
+			for _, err := range errs {
 				fmt.Println(err)
 			}
 
