@@ -4,6 +4,7 @@ A custom linter tool for enforcing CI checks on Dusk Golang repositories.
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/dusk-network/go-analyzer?style=flat-square)](https://goreportcard.com/report/github.com/dusk-network/go-analyzer)
 [![PkgGoDev](https://pkg.go.dev/badge/github.com/dusk-network/go-analyzer)](https://pkg.go.dev/github.com/dusk-network/go-analyzer)
+[![Actions Status](https://github.com/dusk-network/go-analyzer/workflows/Continuous%20Integration/badge.svg)](https://github.com/dusk-network/go-analyzer/actions)
 
 ## About
 
@@ -23,7 +24,7 @@ From there, you can get a full list of commands by simply running:
 $ go-analyzer
 ```
 
-To simply run all available lints, run:
+To run all available lints, run:
 
 ```bash
 $ go-analyzer -a
